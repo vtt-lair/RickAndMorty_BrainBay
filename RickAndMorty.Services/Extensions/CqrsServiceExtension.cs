@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using RickAndMorty.Services.Character.Commands;
 using RickAndMorty.Services.Character.Queries;
+using RickAndMorty.Services.Planet.Commands;
 
 namespace RickAndMorty.Storage.Sql.Extensions
 {
@@ -11,6 +12,8 @@ namespace RickAndMorty.Storage.Sql.Extensions
         {
             services.AddScoped<IGetCharactersQuery, GetCharactersQuery>();
             services.AddScoped<ISaveCharacterCommand, SaveCharacterCommand>();
+            
+            services.AddScoped<ISavePlanetCommand, SavePlanetCommand>();
 
             return services;
         }

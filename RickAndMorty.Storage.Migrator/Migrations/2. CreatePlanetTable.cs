@@ -9,6 +9,8 @@ namespace RickAndMorty.Storage.Migrator.Migrations
         {
             Create.Table("Planets")
                 .WithColumn("Id").AsInt32().PrimaryKey()
+                .WithColumn("DateModified").AsDateTime().NotNullable()
+                .WithColumn("IsDeleted").AsBoolean().NotNullable().WithDefaultValue(false)
                 .WithColumn("Name").AsString().NotNullable()
                 .WithColumn("Type").AsString().Nullable()
                 .WithColumn("Dimension").AsString().Nullable();

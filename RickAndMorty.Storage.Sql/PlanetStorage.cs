@@ -1,9 +1,6 @@
 ﻿using Dapper;
 using RickAndMorty.Services.Data;
-using RickAndMorty.Services.Models;
 using RickAndMorty.Services.Storages;
-
-using Dtos = RickAndMorty.Storage.Dtos;
 
 namespace RickAndMorty.Storage.Sql
 {
@@ -23,6 +20,41 @@ namespace RickAndMorty.Storage.Sql
 
             var dtos = await connection.QueryAsync<Dtos.Planet>("SELECT Id, Name, Type, Dimension FROM Planets;");
             return dtos;
+        }
+
+        public async Task<bool> SaveAsync(Dtos.Planet entity)
+        {
+            using var connection = _connectionFactory.CreateConnection();
+            connection.Open();
+
+            var dto = new Dtos.Planet
+            {
+                Id = entity.Id,
+                DateModified = DateTime.UtcNow,
+                IsDeleted = false,
+                Name = entity.Name,
+                Type = entity.Type,
+                Dimension = entity.Dimension,
+            };
+
+            var sql = @"
+                MERGE INTO Planets AS Target
+                USING (SELECT @Id AS Id) AS Source
+                ON Target.Id = Source.Id
+                WHEN MATCHED THEN
+                    UPDATE SET
+                        Name = @Name,
+                        Type = @Type,
+                        Dimension = @Dimension,
+                        DateModified = @DateModified,
+                        IsDeleted = @IsDeleted
+                WHEN NOT MATCHED THEN
+                    INSERT (Id, Name, Type, Dimension, DateModified, IsDeleted)
+                    VALUES (@Id, @Name, @Type, @Dimension, @DateModified, @IsDeleted);";
+
+            var affected = await connection.ExecuteAsync(sql, dto);
+
+            return affected > 0;
         }
     }
 }
