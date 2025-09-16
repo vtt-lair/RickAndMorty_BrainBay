@@ -1,0 +1,15 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/RickAndMorty.Api
+/.vs
+/RickAndMorty.Importer/obj
+/RickAndMorty.Services/bin/Debug/net8.0
+/RickAndMorty.Storage.Dtos/bin/Debug/net8.0
+/RickAndMorty.Storage.Migrator/bin/Debug/net8.0
+/RickAndMorty.Storage.Sql/bin/Debug/net8.0
+/RickAndMorty.Services/obj
+/RickAndMorty.Storage.Dtos/obj
+/RickAndMorty.Storage.Migrator/obj
+/RickAndMorty.Storage.Sql/obj
