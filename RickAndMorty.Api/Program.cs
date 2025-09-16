@@ -18,6 +18,7 @@ namespace RickAndMorty.Api
             
             builder.Services.AddSqlStorage(builder.Configuration);
             builder.Services.AddCqrs();
+            builder.Services.AddMemoryCache();
 
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
             if (string.IsNullOrEmpty(connectionString))

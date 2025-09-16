@@ -28,7 +28,7 @@ namespace RickAndMorty.Storage.Sql
                 FROM Characters c
                     LEFT JOIN Planets o ON c.OriginId = o.Id
                     LEFT JOIN Planets l ON c.LocationId = l.Id
-                WHERE c.IsDeleted = false;
+                WHERE c.IsDeleted = 0;
             ";
 
             var dtos = await connection.QueryAsync<Dtos.Character>(sql);
