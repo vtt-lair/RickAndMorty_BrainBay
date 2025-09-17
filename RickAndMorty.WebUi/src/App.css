@@ -41,8 +41,20 @@
   color: #888;
 }
 
+.character-card-box {
+  background-color: #f5f5f5;
+}
+
 .character-card {
   max-width: 300px;
   height: 288px;
   margin: 0 auto;
+}
+
+.page-title {
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.clear-icon {
+  cursor: pointer;
 }
