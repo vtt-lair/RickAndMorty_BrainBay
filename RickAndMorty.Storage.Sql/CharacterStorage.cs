@@ -40,19 +40,34 @@ namespace RickAndMorty.Storage.Sql
             using var connection = _connectionFactory.CreateConnection();
             connection.Open();
 
-            var dto = new Dtos.Character
-            {
-                Id = entity.Id,
-                DateModified = DateTime.UtcNow,
-                IsDeleted = false,
-                Name = entity.Name,
-                Species = entity.Species,
-                Type = entity.Type,
-                Gender = entity.Gender,
-                OriginId = entity.OriginId,
-                LocationId = entity.LocationId,
-                Image = entity.Image,
-            };
+            var sql = @"
+                MERGE INTO Characters AS Target
+                USING (SELECT @Id AS Id) AS Source
+                ON Target.Id = Source.Id
+                WHEN MATCHED THEN
+                    UPDATE SET
+                        Name = @Name,
+                        Species = @Species,
+                        Type = @Type,
+                        Gender = @Gender,
+                        OriginId = @OriginId,
+                        LocationId = @LocationId,
+                        Image = @Image,
+                        DateModified = @DateModified,
+                        IsDeleted = @IsDeleted
+                WHEN NOT MATCHED THEN
+                    INSERT (Id, Name, Species, Type, Gender, OriginId, LocationId, Image, DateModified, IsDeleted)
+                    VALUES (@Id, @Name, @Species, @Type, @Gender, @OriginId, @LocationId, @Image, @DateModified, @IsDeleted);";
+
+            var affected = await connection.ExecuteAsync(sql, entity);
+
+            return affected > 0;
+        }
+
+        public async Task<bool> BulkSaveAsync(IEnumerable<Dtos.Character> entities)
+        {
+            using var connection = _connectionFactory.CreateConnection();
+            connection.Open();
 
             var sql = @"
                 MERGE INTO Characters AS Target
@@ -73,7 +88,18 @@ namespace RickAndMorty.Storage.Sql
                     INSERT (Id, Name, Species, Type, Gender, OriginId, LocationId, Image, DateModified, IsDeleted)
                     VALUES (@Id, @Name, @Species, @Type, @Gender, @OriginId, @LocationId, @Image, @DateModified, @IsDeleted);";
 
-            var affected = await connection.ExecuteAsync(sql, dto);
+            var affected = await connection.ExecuteAsync(sql, entities.ToList());
+
+            return affected > 0;
+        }
+
+        public async Task<bool> DeleteAllAsync()
+        {
+            using var connection = _connectionFactory.CreateConnection();
+            connection.Open();
+
+            var sql = "DELETE FROM Characters";
+            var affected = await connection.ExecuteAsync(sql, new { DateModified = DateTime.UtcNow });
 
             return affected > 0;
         }

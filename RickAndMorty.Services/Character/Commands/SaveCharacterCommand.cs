@@ -12,7 +12,7 @@ namespace RickAndMorty.Services.Character.Commands
             _characterStorage = characterStorage ?? throw new ArgumentNullException(nameof(characterStorage));
         }
 
-        public Task<bool> ExecuteAsync(Models.Character character)
+        public async Task<Models.Character?> ExecuteAsync(Models.Character character)
         {
             var dto = new Dtos.Character
             {
@@ -28,7 +28,9 @@ namespace RickAndMorty.Services.Character.Commands
                 Image = character.Image,
             };
 
-            return _characterStorage.SaveAsync(dto);
+            var saved = await _characterStorage.SaveAsync(dto);
+            if (saved) return character;
+            else return null;
         }
     }
 }

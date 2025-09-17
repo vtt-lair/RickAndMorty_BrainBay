@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "RickAndMorty.Importer\\RickAndMorty.Importer.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "RickAndMorty.Api\\RickAndMorty.Api.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

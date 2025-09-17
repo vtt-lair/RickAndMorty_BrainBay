@@ -7,5 +7,7 @@ namespace RickAndMorty.Services.Storages
         public Task<IEnumerable<Dtos.Planet>?> GetAllAsync();
 
         public Task<bool> SaveAsync(Dtos.Planet entity);
+
+        public Task<bool> DeleteAllAsync();
     }
 }

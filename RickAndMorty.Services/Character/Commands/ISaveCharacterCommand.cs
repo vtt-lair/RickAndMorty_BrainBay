@@ -2,6 +2,6 @@
 {
     public interface ISaveCharacterCommand
     {
-        Task<bool> ExecuteAsync(Models.Character character);
+        Task<Models.Character?> ExecuteAsync(Models.Character character);
     }
 }

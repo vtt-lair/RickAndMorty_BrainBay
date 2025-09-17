@@ -12,8 +12,11 @@ namespace RickAndMorty.Storage.Sql.Extensions
         {
             services.AddScoped<IGetCharactersQuery, GetCharactersQuery>();
             services.AddScoped<ISaveCharacterCommand, SaveCharacterCommand>();
-            
+            services.AddScoped<IBulkSaveCharacterCommand, BulkSaveCharacterCommand>();
+            services.AddScoped<IDeleteAllCharactersCommand, DeleteAllCharactersCommand>();
+
             services.AddScoped<ISavePlanetCommand, SavePlanetCommand>();
+            services.AddScoped<IDeleteAllPlanetsCommand, DeleteAllPlanetsCommand>();
 
             return services;
         }

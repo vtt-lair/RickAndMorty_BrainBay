@@ -12,7 +12,7 @@ namespace RickAndMorty.Services.Planet.Commands
             _planetStorage = planetStorage ?? throw new ArgumentNullException(nameof(planetStorage));
         }
 
-        public Task<bool> ExecuteAsync(Models.Planet planet)
+        public async Task<Models.Planet?> ExecuteAsync(Models.Planet planet)
         {
             var dto = new Dtos.Planet
             {
@@ -24,7 +24,10 @@ namespace RickAndMorty.Services.Planet.Commands
                 Dimension = planet.Dimension,
             };
 
-            return _planetStorage.SaveAsync(dto);
+            var saved = await _planetStorage.SaveAsync(dto);
+
+            if (saved) return planet;
+            else return null;
         }
     }
 }

@@ -2,6 +2,6 @@
 {
     public interface ISavePlanetCommand
     {
-        Task<bool> ExecuteAsync(Models.Planet planet);
+        Task<Models.Planet> ExecuteAsync(Models.Planet planet);
     }
 }

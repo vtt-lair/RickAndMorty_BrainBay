@@ -8,5 +8,9 @@ namespace RickAndMorty.Services.Storages
 
         public Task<bool> SaveAsync(Dtos.Character entity);
 
+        public Task<bool> BulkSaveAsync(IEnumerable<Dtos.Character> entities);
+
+        public Task<bool> DeleteAllAsync();
+
     }
 }

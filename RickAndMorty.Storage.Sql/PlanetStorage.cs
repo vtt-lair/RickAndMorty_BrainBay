@@ -27,16 +27,6 @@ namespace RickAndMorty.Storage.Sql
             using var connection = _connectionFactory.CreateConnection();
             connection.Open();
 
-            var dto = new Dtos.Planet
-            {
-                Id = entity.Id,
-                DateModified = DateTime.UtcNow,
-                IsDeleted = false,
-                Name = entity.Name,
-                Type = entity.Type,
-                Dimension = entity.Dimension,
-            };
-
             var sql = @"
                 MERGE INTO Planets AS Target
                 USING (SELECT @Id AS Id) AS Source
@@ -52,8 +42,19 @@ namespace RickAndMorty.Storage.Sql
                     INSERT (Id, Name, Type, Dimension, DateModified, IsDeleted)
                     VALUES (@Id, @Name, @Type, @Dimension, @DateModified, @IsDeleted);";
 
-            var affected = await connection.ExecuteAsync(sql, dto);
+            var affected = await connection.ExecuteAsync(sql, entity);
 
+            return affected > 0;
+        }
+
+        public async Task<bool> DeleteAllAsync()
+        {
+            using var connection = _connectionFactory.CreateConnection();
+            connection.Open();
+         
+            var sql = "DELETE FROM Planets;";
+            var affected = await connection.ExecuteAsync(sql);
+            
             return affected > 0;
         }
     }
