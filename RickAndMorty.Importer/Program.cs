@@ -1,7 +1,11 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using RickAndMorty.Configuration;
 using RickAndMorty.Importer.Configuration;
+using RickAndMorty.Storage.Sql.Extensions;
+using RickAndMorty.Storage.Migrator.Extensions;
+using RickAndMorty.Configuration.Extensions;
 
 namespace RickAndMorty.Importer
 {
@@ -16,6 +20,7 @@ namespace RickAndMorty.Importer
             try
             {
                 ConfigureServices();
+                await RunMigrationsAsync();
                 await ClearDataAsync();
                 await GetDataAsync();
                 Console.WriteLine("Import completed successfully!");
@@ -33,7 +38,12 @@ namespace RickAndMorty.Importer
 
             IConfiguration config = new ConfigurationBuilder()
                 .AddJsonFile(Path.Combine(Environment.CurrentDirectory, "appsettings.json"))
+                .AddJsonFile(Path.Combine(Environment.CurrentDirectory, "appsettings.api.json"), optional: true)
                 .Build();
+
+            services.AddDataAccess(config);
+            services.AddMigrations(config);
+            services.AddProcessors();
 
             services.AddSingleton(provider =>
             {
@@ -45,21 +55,26 @@ namespace RickAndMorty.Importer
             });
 
             services.AddHttpClient();
-
             services.AddLogging(builder => builder.AddConsole());
 
-            services.AddTransient<CharacterProcessor>();
-            services.AddTransient<PlanetProcessor>();
-
             _serviceProvider = services.BuildServiceProvider();
+        }
+
+        private static async Task RunMigrationsAsync()
+        {
+            using var scope = _serviceProvider.CreateScope();
+            var runner = scope.ServiceProvider.GetRequiredService<FluentMigrator.Runner.IMigrationRunner>();
+            Console.WriteLine("Running database migrations...");
+            runner.MigrateUp();
+            Console.WriteLine("Database migrations completed.");
         }
 
         private static async Task ClearDataAsync()
         {
             using var scope = _serviceProvider.CreateScope();
 
-            var characterProcessor = scope.ServiceProvider.GetRequiredService<CharacterProcessor>();
-            var planetProcessor = scope.ServiceProvider.GetRequiredService<PlanetProcessor>();
+            var characterProcessor = scope.ServiceProvider.GetRequiredService<ICharacterProcessor>();
+            var planetProcessor = scope.ServiceProvider.GetRequiredService<IPlanetProcessor>();
 
             await characterProcessor.ClearCharactersAsync();
             await planetProcessor.ClearPlanetsAsync();
@@ -69,7 +84,7 @@ namespace RickAndMorty.Importer
         {
             using var scope = _serviceProvider.CreateScope();
 
-            var characterProcessor = scope.ServiceProvider.GetRequiredService<CharacterProcessor>();
+            var characterProcessor = scope.ServiceProvider.GetRequiredService<ICharacterProcessor>();
 
             var result = await characterProcessor.GetCharactersAsync();
             await characterProcessor.ProcessResultsAsync(result);

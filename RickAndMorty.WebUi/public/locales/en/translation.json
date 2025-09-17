@@ -1,0 +1,17 @@
+{
+    "general": {
+        "site_name": "Living Rick and Morty Character Encyclopedia"
+    },
+    "pages": {
+        "characters": "Characters"
+    },
+    "headers": {
+        "character_name": "Character Name",
+        "character_species": "Species",
+        "character_type": "Type",
+        "character_gender": "Gender",
+        "character_origin": "Origin Planet",
+        "character_location": "Current Location",
+        "character_image": "Avatar"
+    }
+}

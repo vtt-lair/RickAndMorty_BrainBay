@@ -2,7 +2,6 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/RickAndMorty.Api
 /.vs
 /RickAndMorty.Importer/obj
 /RickAndMorty.Services/bin/Debug/net8.0
@@ -16,3 +15,7 @@
 /RickAndMorty.Importer/bin/Debug/net8.0
 /RickAndMorty.Importer.Tests/bin/Debug/net8.0
 /RickAndMorty.Importer.Tests/obj
+/RickAndMorty.Configuration/bin/Debug/net8.0
+/RickAndMorty.Configuration/obj
+/RickAndMorty.Api/bin/Debug/net8.0
+/RickAndMorty.Api/obj
