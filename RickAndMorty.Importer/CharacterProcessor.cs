@@ -7,16 +7,16 @@ using System.Text;
 
 namespace RickAndMorty.Importer
 {
-    public class CharacterProcessor
+    public class CharacterProcessor : ICharacterProcessor
     {
         private readonly IHttpClientFactory _httpClientFactory;
-        private readonly PlanetProcessor _planetProcessor;
+        private readonly IPlanetProcessor _planetProcessor;
         private readonly ILogger<CharacterProcessor> _logger;
         private readonly ApiConfiguration _apiConfiguration;
 
         public CharacterProcessor(
             IHttpClientFactory httpClientFactory,
-            PlanetProcessor planetProcessor,
+            IPlanetProcessor planetProcessor,
             ILogger<CharacterProcessor> logger,
             ApiConfiguration apiConfiguration)
         {
@@ -29,7 +29,10 @@ namespace RickAndMorty.Importer
         public async Task<Info?> GetInfo()
         {
             using var client = _httpClientFactory.CreateClient();
-            client.BaseAddress = _apiConfiguration.RemoteApi;
+            if (client.BaseAddress == null)
+            {
+                client.BaseAddress = _apiConfiguration.RemoteApi;
+            }
 
             try
             {
@@ -54,14 +57,17 @@ namespace RickAndMorty.Importer
             }
         }
 
-        public async Task<List<CharacterResult>?> GetCharactersAsync(int page = 1, List<CharacterResult> characterResults = null)
+        public async Task<List<CharacterResult>?> GetCharactersAsync(int page = 1, List<CharacterResult>? characterResults = null)
         {
             characterResults ??= new List<CharacterResult>();
 
             _logger.LogInformation("Getting Characters Page {Page}...", page);
 
             using var client = _httpClientFactory.CreateClient();
-            client.BaseAddress = _apiConfiguration.RemoteApi;
+            if (client.BaseAddress == null)
+            {
+                client.BaseAddress = _apiConfiguration.RemoteApi;
+            }
 
             try
             {
@@ -145,7 +151,10 @@ namespace RickAndMorty.Importer
         public async Task<bool> ClearCharactersAsync()
         {
             using var client = _httpClientFactory.CreateClient();
-            client.BaseAddress = _apiConfiguration.LocalApi;
+            if (client.BaseAddress == null)
+            {
+                client.BaseAddress = _apiConfiguration.LocalApi;
+            }
 
             try
             {
@@ -191,7 +200,10 @@ namespace RickAndMorty.Importer
         private async Task<bool> SaveCharactersAsync(List<Character> characters)
         {
             using var client = _httpClientFactory.CreateClient();
-            client.BaseAddress = _apiConfiguration.LocalApi;
+            if (client.BaseAddress == null)
+            {
+                client.BaseAddress = _apiConfiguration.LocalApi;
+            }
 
             try
             {

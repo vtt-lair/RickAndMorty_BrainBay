@@ -8,7 +8,7 @@ using System.Text;
 
 namespace RickAndMorty.Importer
 {
-    public class PlanetProcessor
+    public class PlanetProcessor : IPlanetProcessor
     {
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly ILogger<PlanetProcessor> _logger;
@@ -49,7 +49,7 @@ namespace RickAndMorty.Importer
 
             try
             {
-                var response = await client.GetAsync("");
+                var response = await client.GetAsync(planetResult.Url);
                 if (response.IsSuccessStatusCode)
                 {
                     var location = await response.Content.ReadFromJsonAsync<PlanetResult>();
@@ -85,7 +85,10 @@ namespace RickAndMorty.Importer
         public async Task<bool> ClearPlanetsAsync()
         {
             using var client = _httpClientFactory.CreateClient();
-            client.BaseAddress = _apiConfiguration.LocalApi;
+            if (client.BaseAddress == null)
+            {
+                client.BaseAddress = _apiConfiguration.LocalApi;
+            }
 
             try
             {
@@ -124,7 +127,10 @@ namespace RickAndMorty.Importer
         private async Task<Planet?> SavePlanetAsync(Planet planet)
         {
             using var client = _httpClientFactory.CreateClient();
-            client.BaseAddress = _apiConfiguration.LocalApi;
+            if (client.BaseAddress == null)
+            {
+                client.BaseAddress = _apiConfiguration.LocalApi;
+            }
 
             try
             {

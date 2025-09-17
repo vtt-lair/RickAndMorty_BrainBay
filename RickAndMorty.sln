@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RickAndMorty.Storage.Dtos",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RickAndMorty.Api", "RickAndMorty.Api\RickAndMorty.Api.csproj", "{13B3E644-7716-49BC-9C75-9A0037EA068E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RickAndMorty.Importer.Tests", "RickAndMorty.Importer.Tests\RickAndMorty.Importer.Tests.csproj", "{48DA5A05-0AC3-3890-E87C-2FFCA1D13D66}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{13B3E644-7716-49BC-9C75-9A0037EA068E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13B3E644-7716-49BC-9C75-9A0037EA068E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{13B3E644-7716-49BC-9C75-9A0037EA068E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48DA5A05-0AC3-3890-E87C-2FFCA1D13D66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48DA5A05-0AC3-3890-E87C-2FFCA1D13D66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48DA5A05-0AC3-3890-E87C-2FFCA1D13D66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48DA5A05-0AC3-3890-E87C-2FFCA1D13D66}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
