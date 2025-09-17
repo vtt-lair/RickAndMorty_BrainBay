@@ -40,3 +40,9 @@
 .read-the-docs {
   color: #888;
 }
+
+.character-card {
+  max-width: 300px;
+  height: 288px;
+  margin: 0 auto;
+}
