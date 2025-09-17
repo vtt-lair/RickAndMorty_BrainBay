@@ -16,3 +16,5 @@
 /RickAndMorty.Importer/bin/Debug/net8.0
 /RickAndMorty.Importer.Tests/bin/Debug/net8.0
 /RickAndMorty.Importer.Tests/obj
+/RickAndMorty.Configuration/bin/Debug/net8.0
+/RickAndMorty.Configuration/obj
