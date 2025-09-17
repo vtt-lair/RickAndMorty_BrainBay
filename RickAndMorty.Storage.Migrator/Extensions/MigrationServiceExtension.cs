@@ -1,14 +1,17 @@
 using FluentMigrator.Runner;
 using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using RickAndMorty.Configuration;
 using RickAndMorty.Storage.Migrator.Migrations;
 
 namespace RickAndMorty.Storage.Migrator.Extensions
 {
     public static class MigrationServiceExtension
     {
-        public static IServiceCollection AddMigrations(this IServiceCollection services, string connectionString)
+        public static IServiceCollection AddMigrations(this IServiceCollection services, IConfiguration configuration)
         {
+            var connectionString = ConnectionStringProvider.GetConnectionString(configuration);
             EnsureDatabaseExists(connectionString);
 
             services

@@ -1,0 +1,17 @@
+{
+    "general": {
+        "site_name": "Levende Rick and Morty Karakter Encyclopedie"
+    },
+    "pages": {
+        "characters": "Karakter"
+    },
+    "headers": {
+        "character_name": "Karakter Naam",
+        "character_species": "Soort",
+        "character_type": "Type",
+        "character_gender": "Geslacht",
+        "character_origin": "Planeet van Oorsprong",
+        "character_location": "Huidige Locatie",
+        "character_image": "Avatar"
+    }
+}

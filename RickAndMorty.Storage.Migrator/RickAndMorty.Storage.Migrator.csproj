@@ -11,4 +11,8 @@
     <PackageReference Include="FluentMigrator.Runner" Version="7.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\RickAndMorty.Configuration\RickAndMorty.Configuration.csproj" />
+  </ItemGroup>
+
 </Project>

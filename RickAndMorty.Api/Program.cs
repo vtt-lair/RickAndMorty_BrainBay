@@ -1,4 +1,4 @@
-using RickAndMorty.Storage.Migrator.Extensions;
+using RickAndMorty.Configuration.Extensions;
 using RickAndMorty.Storage.Sql.Extensions;
 
 namespace RickAndMorty.Api
@@ -13,24 +13,22 @@ namespace RickAndMorty.Api
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             
-            builder.Services.AddSqlStorage(builder.Configuration);
+            builder.Services.AddDataAccess(builder.Configuration);
+            builder.Services.AddSqlStorage();
             builder.Services.AddCqrs();
             builder.Services.AddMemoryCache();
 
-            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-            if (string.IsNullOrEmpty(connectionString))
+            builder.Services.AddCors(options =>
             {
-                throw new InvalidOperationException("DefaultConnection string is not configured.");
-            }
-            builder.Services.AddMigrations(connectionString);
+                options.AddPolicy("AllowSpecificOrigins", policy =>
+                {
+                    policy.WithOrigins("http://localhost:5173")
+                          .AllowAnyMethod()
+                          .AllowAnyHeader();
+                });
+            });
 
             var app = builder.Build();
-
-            using (var scope = app.Services.CreateScope())
-            {
-                var runner = scope.ServiceProvider.GetRequiredService<FluentMigrator.Runner.IMigrationRunner>();
-                runner.MigrateUp();
-            }
 
             if (app.Environment.IsDevelopment())
             {
@@ -39,10 +37,8 @@ namespace RickAndMorty.Api
             }
 
             app.UseHttpsRedirection();
-
+            app.UseCors("AllowSpecificOrigins");
             app.UseAuthorization();
-
-
             app.MapControllers();
 
             app.Run();
