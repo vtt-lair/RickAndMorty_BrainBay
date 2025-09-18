@@ -202,7 +202,7 @@ export default function CharacterForm() {
                             options={planets}
                             groupBy={(planet: Planet) => t(planet.dimension ?? "")}
                             getOptionLabel={(planet: Planet) => planet.name ?? ""}
-                            value={planets.find(planet => planet.id === formik.values.locationId) || null}
+                            value={planets.find(planet => planet.id === formik.values.originId) || null}
                             onChange={(_, value) => { 
                                 formik.setFieldValue('originId', value?.id || 0) 
                             }}
