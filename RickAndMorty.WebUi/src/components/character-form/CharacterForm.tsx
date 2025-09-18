@@ -1,4 +1,4 @@
-import { Box, Button, CardActions, CardContent, FormControl, Grid, InputLabel, MenuItem, Select, Stack, TextField, Typography } from "@mui/material"
+import { Autocomplete, Box, Button, CardActions, CardContent, FormControl, Grid, InputLabel, MenuItem, Select, Stack, TextField, Typography } from "@mui/material"
 import { useTranslation } from "react-i18next";
 import * as yup from 'yup';
 import { useFormik } from "formik";
@@ -7,6 +7,7 @@ import api from "../../services/api";
 import { useLoaderData, useNavigate } from "react-router";
 import { Character } from "../../models/character";
 import SnackbarUtils from "../snackbar-utils/SnackbarUtils";
+import type { Planet } from "../../models/planet";
 
 type AddCharacterFormProps = {
     name: string,
@@ -175,41 +176,45 @@ export default function CharacterForm() {
                         />
                     </Grid>
                     <Grid size={{ xs: 12, md: 6 }}>
-                        <FormControl fullWidth>
-                            <InputLabel id="locationIdLabel">{t('labels.character_location')}</InputLabel>
-                            <Select
-                                labelId="locationIdLabel"
-                                id="locationId"
-                                value={formik.values.locationId}
+                        <Autocomplete
+                            fullWidth                            
+                            options={planets}
+                            groupBy={(planet: Planet) => t(planet.dimension ?? "")}
+                            getOptionLabel={(planet: Planet) => planet.name ?? ""}
+                            value={planets.find(planet => planet.id === formik.values.locationId) || null}
+                            onChange={(_, value) => { 
+                                formik.setFieldValue('locationId', value?.id || 0) 
+                            }}
+                            onBlur={() => formik.setFieldTouched('locationId', true)}
+                            isOptionEqualToValue={(option, value) => option.id === value.id}
+                            renderInput={(params) => <TextField 
+                                {...params} 
                                 label={t('labels.character_location')}
-                                onChange={(event) => { formik.setFieldValue('locationId', event.target.value) }}
+                                helperText={formik.touched.locationId && formik.errors.locationId}
                                 error={formik.touched.locationId && Boolean(formik.errors.locationId)}
-                            >
-                                <MenuItem value={0}></MenuItem>
-                                {planets?.map((planet) => (
-                                    <MenuItem key={planet.id} value={planet.id}>{planet.name}</MenuItem>
-                                ))}
-                            </Select>
-                        </FormControl>                            
+                            />}                            
+                        />                          
                     </Grid>
 
                     <Grid size={{ xs: 12, md: 6 }}>
-                        <FormControl fullWidth>
-                            <InputLabel id="originIdLabel">{t('labels.character_origin')}</InputLabel>
-                            <Select
-                                labelId="originIdLabel"
-                                id="originId"
-                                value={formik.values.originId}
+                        <Autocomplete
+                            fullWidth                            
+                            options={planets}
+                            groupBy={(planet: Planet) => t(planet.dimension ?? "")}
+                            getOptionLabel={(planet: Planet) => planet.name ?? ""}
+                            value={planets.find(planet => planet.id === formik.values.locationId) || null}
+                            onChange={(_, value) => { 
+                                formik.setFieldValue('originId', value?.id || 0) 
+                            }}
+                            onBlur={() => formik.setFieldTouched('originId', true)}
+                            isOptionEqualToValue={(option, value) => option.id === value.id}
+                            renderInput={(params) => <TextField 
+                                {...params} 
                                 label={t('labels.character_origin')}
-                                onChange={(event) => { formik.setFieldValue('originId', event.target.value) }}
+                                helperText={formik.touched.originId && formik.errors.originId}
                                 error={formik.touched.originId && Boolean(formik.errors.originId)}
-                            >
-                                <MenuItem value={0}></MenuItem>
-                                {planets?.map((planet) => (
-                                    <MenuItem key={planet.id} value={planet.id}>{planet.name}</MenuItem>
-                                ))}
-                            </Select>
-                        </FormControl>
+                            />}                            
+                        />
                     </Grid>
                     <Grid size={{ xs: 12, md: 6 }}>
                         <TextField
