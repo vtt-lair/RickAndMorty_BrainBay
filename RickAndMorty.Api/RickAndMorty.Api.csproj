@@ -13,7 +13,6 @@
   <ItemGroup>
     <ProjectReference Include="..\RickAndMorty.Configuration\RickAndMorty.Configuration.csproj" />
     <ProjectReference Include="..\RickAndMorty.Services\RickAndMorty.Services.csproj" />
-    <ProjectReference Include="..\RickAndMorty.Storage.Sql\RickAndMorty.Storage.Sql.csproj" />
   </ItemGroup>
 
 </Project>

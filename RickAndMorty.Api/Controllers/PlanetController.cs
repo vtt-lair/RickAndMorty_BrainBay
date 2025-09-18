@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RickAndMorty.Services.Character.Queries;
 using RickAndMorty.Services.Planet.Commands;
 using Models = RickAndMorty.Services.Models;
 
@@ -10,12 +11,20 @@ namespace RickAndMorty.Api.Controllers
     {
         private readonly ISavePlanetCommand _savePlanetCommand;
         private readonly IDeleteAllPlanetsCommand _deleteAllPlanetsCommand;
+        private readonly IGetPlanetsQuery _getPlanetsQuery;
 
-        public PlanetController(ISavePlanetCommand savePlanetCommand, IDeleteAllPlanetsCommand deleteAllPlanetsCommand)
+        public PlanetController(ISavePlanetCommand savePlanetCommand, IDeleteAllPlanetsCommand deleteAllPlanetsCommand, IGetPlanetsQuery getPlanetsQuery)
         {
             _savePlanetCommand = savePlanetCommand ?? throw new ArgumentNullException(nameof(savePlanetCommand));
             _deleteAllPlanetsCommand = deleteAllPlanetsCommand ?? throw new ArgumentNullException(nameof(deleteAllPlanetsCommand));
-            _deleteAllPlanetsCommand = deleteAllPlanetsCommand;
+            _getPlanetsQuery = getPlanetsQuery ?? throw new ArgumentNullException(nameof(getPlanetsQuery));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            var planets = await _getPlanetsQuery.ExecuteAsync();
+            return Ok(planets);
         }
 
         [HttpPost]

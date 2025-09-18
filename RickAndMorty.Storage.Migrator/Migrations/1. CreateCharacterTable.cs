@@ -8,7 +8,8 @@ namespace RickAndMorty.Storage.Migrator.Migrations
         public override void Up()
         {
             Create.Table("Characters")
-                .WithColumn("Id").AsInt32().PrimaryKey()
+                .WithColumn("Id").AsInt32().PrimaryKey().Identity()
+                .WithColumn("ExternalId").AsInt32().Nullable()
                 .WithColumn("DateModified").AsDateTime().NotNullable()
                 .WithColumn("IsDeleted").AsBoolean().NotNullable().WithDefaultValue(false)
                 .WithColumn("Name").AsString().NotNullable()

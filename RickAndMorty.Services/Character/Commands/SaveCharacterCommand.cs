@@ -16,7 +16,6 @@ namespace RickAndMorty.Services.Character.Commands
         {
             var dto = new Dtos.Character
             {
-                Id = character.Id,
                 DateModified = DateTime.UtcNow,
                 IsDeleted = false,
                 Name = character.Name,

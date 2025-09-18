@@ -186,7 +186,7 @@ namespace RickAndMorty.Importer
 
             return new Character()
             {
-                Id = result.Id,
+                ExternalId = result.Id,
                 Name = result.Name,
                 Species = result.Species,
                 Type = result.Type,

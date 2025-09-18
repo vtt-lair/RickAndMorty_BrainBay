@@ -17,7 +17,7 @@ namespace RickAndMorty.Services.Character.Commands
         {
             var dtos = characters.Select(entity => new Dtos.Character
             {
-                Id = entity.Id,
+                ExternalId = entity.ExternalId,
                 DateModified = DateTime.UtcNow,
                 IsDeleted = false,
                 Name = entity.Name,
