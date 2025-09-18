@@ -12,7 +12,7 @@ Frontend: Vite React.js
 ```
 3. Restore NuGet Packages to make sure all used packages are installed.
 4. Make sure there isn't any database in your localdb called ```RickAndMortyDb```.
-5. Rebuild and then Start as http.
+5. Rebuild and then Start as http. If asked to run in SSL, select ```No```.
 
 ## Setup Frontend
 1. Repo would already have been cloned.
