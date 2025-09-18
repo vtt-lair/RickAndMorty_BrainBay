@@ -5,7 +5,7 @@ Frontend: Vite React.js
 
 ## Setup Importer and API
 1. Clone the repo.
-2. Open the Solution, it should to have the following projects to start ```but``` you might need to set the solution to use Multiple Startup Project. So make sure that the following two projects are set to start
+2. Open the Solution, it should to have the following projects to start ```but``` you might need to set the solution to use Multiple Startup Project. So make sure that the following two projects are set to start:
 ```
 - RickAndMorty.Api
 - RickAndMorty.Importer
