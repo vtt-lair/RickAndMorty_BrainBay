@@ -1,4 +1,4 @@
-import { CardContent, Box, Button, Stack, Grid, Typography, Pagination } from "@mui/material";
+import { Box, Button, Stack, Grid, Typography, Pagination } from "@mui/material";
 import queryClient from "../../utils/query-client";
 import api from "../../services/api";
 import { useLoaderData, useNavigate } from "react-router";
@@ -68,11 +68,24 @@ export default function CharacterList() {
 
     return (
         <Box 
-            maxWidth="lg"
+            sx={{
+                width: '100%',
+                minHeight: '100vh',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                py: 2
+            }}
             className="character-card-box"
         >
-            <CardContent>
-                <Stack direction={"row"} justifyContent="space-between" alignItems="start" mb={2}>
+            <Box
+                sx={{
+                    width: '100%',
+                    maxWidth: { xs: '95%' },
+                    px: { xs: 2, sm: 3, md: 4 }
+                }}
+            > 
+                <Stack direction={"row"} justifyContent="space-between" alignItems="start" mb={2} px={{ xs: 2, sm: 3, md: 4 }} pr={{ xs: 3, sm: 4, md: 5 }}>
                     <Typography sx={{ typography: { md: 'h3', sm: 'h4', xs: 'h6' } }} component="div" className="page-title">
                         {t('titles.character_list')}
                     </Typography>
@@ -84,7 +97,7 @@ export default function CharacterList() {
                     </Stack>
                 </Stack>
 
-                <Grid container spacing={2} direction={"row"}>
+                <Grid container spacing={2} direction={"row"} px={{ xs: 1, sm: 2, md: 3 }}>
                     {currentCharacters.map(c => (
                         <Grid key={c.id} size={{ xs: 6, md: 4, lg: 2 }}>
                             <CharacterCard character={c} />
@@ -92,7 +105,7 @@ export default function CharacterList() {
                     ))}
                 </Grid>
 
-                <Box display="flex" justifyContent="center" mt={3}>
+                <Box display="flex" justifyContent="center" mt={3} px={{ xs: 2, sm: 3, md: 4 }}>
                     <Pagination 
                         count={totalPages}
                         page={currentPage}
@@ -101,7 +114,7 @@ export default function CharacterList() {
                         size="large"
                     />
                 </Box>
-            </CardContent>
+            </Box>
         </Box>
     )
 }

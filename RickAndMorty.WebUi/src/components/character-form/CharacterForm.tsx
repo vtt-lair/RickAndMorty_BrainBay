@@ -91,140 +91,154 @@ export default function CharacterForm() {
     
     return (
         <Box 
-            maxWidth="lg"
+            sx={{
+                width: '100%',
+                minHeight: '100vh',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                py: 2
+            }}
             className="character-card-box"
         >
-            <CardContent>
-                <Stack direction={"row"} spacing={2} mb={2} justifyContent="space-between" alignItems="start">
-                    <Typography sx={{ typography: { md: 'h3', sm: 'h4', xs: 'h6' } }} component="div" className="page-title">
-                        {t('titles.add_character')}
-                    </Typography>
-                    <Button variant="outlined" color="secondary" onClick={() => navigate(-1)}>
-                        {t('buttons.back')}
-                    </Button>
-                </Stack>
+            <Box
+                sx={{
+                    width: '100%',
+                    maxWidth: { xs: '95%', sm: '600px', md: '800px', lg: '900px' },
+                    px: { xs: 2, sm: 3, md: 4 }
+                }}
+            >            
+            <Stack direction={"row"} spacing={2} mb={2} justifyContent="space-between" alignItems="start">
+                <Typography sx={{ typography: { md: 'h3', sm: 'h4', xs: 'h6' } }} component="div" className="page-title">
+                    {t('titles.add_character')}
+                </Typography>
+                <Button variant="outlined" color="secondary" onClick={() => navigate(-1)}>
+                    {t('buttons.back')}
+                </Button>
+            </Stack>
 
-                <form onSubmit={formik.handleSubmit} key="addCharacterForm">
+            <form onSubmit={formik.handleSubmit} key="addCharacterForm">
+                <Box>
                     <Grid container spacing={2}>
-                        <Grid size={{ xs: 12 }}>
-                            <TextField
-                                id="name"
-                                fullWidth
-                                variant="outlined"
-                                label={t('labels.character_name')}
-                                value={formik.values.name}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                helperText={formik.touched.name && formik.errors.name}
-                                error={formik.touched.name && Boolean(formik.errors.name)}
-                            />
-                        </Grid>
-
-                        <Grid size={{ xs: 12, md: 6 }}>
-                            <TextField
-                                id="species"
-                                fullWidth
-                                variant="outlined"
-                                label={t('labels.character_species')}
-                                value={formik.values.species}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                helperText={formik.touched.species && formik.errors.species}
-                                error={formik.touched.species && Boolean(formik.errors.species)}
-                            />
-                        </Grid>
-                        <Grid size={{ xs: 12, md: 6 }}>
-                            <TextField
-                                id="type"
-                                fullWidth
-                                variant="outlined"
-                                label={t('labels.character_type')}
-                                value={formik.values.type}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                helperText={formik.touched.type && formik.errors.type}
-                                error={formik.touched.type && Boolean(formik.errors.type)}
-                            />
-                        </Grid>
-
-                        <Grid size={{ xs: 12, md: 6 }}>
-                            <TextField
-                                id="gender"
-                                fullWidth
-                                variant="outlined"
-                                label={t('labels.character_gender')}
-                                value={formik.values.gender}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                helperText={formik.touched.gender && formik.errors.gender}
-                                error={formik.touched.gender && Boolean(formik.errors.gender)}
-                            />
-                        </Grid>
-                        <Grid size={{ xs: 12, md: 6 }}>
-                            <FormControl fullWidth>
-                                <InputLabel id="locationIdLabel">{t('labels.character_location')}</InputLabel>
-                                <Select
-                                    labelId="locationIdLabel"
-                                    id="locationId"
-                                    value={formik.values.locationId}
-                                    label={t('labels.character_location')}
-                                    onChange={(event) => { formik.setFieldValue('locationId', event.target.value) }}
-                                    error={formik.touched.locationId && Boolean(formik.errors.locationId)}
-                                >
-                                    <MenuItem value={0}></MenuItem>
-                                    {planets?.map((planet) => (
-                                        <MenuItem key={planet.id} value={planet.id}>{planet.name}</MenuItem>
-                                    ))}
-                                </Select>
-                            </FormControl>                            
-                        </Grid>
-
-                        <Grid size={{ xs: 12, md: 6 }}>
-                            <FormControl fullWidth>
-                                <InputLabel id="originIdLabel">{t('labels.character_origin')}</InputLabel>
-                                <Select
-                                    labelId="originIdLabel"
-                                    id="originId"
-                                    value={formik.values.originId}
-                                    label={t('labels.character_origin')}
-                                    onChange={(event) => { formik.setFieldValue('originId', event.target.value) }}
-                                    error={formik.touched.originId && Boolean(formik.errors.originId)}
-                                >
-                                    <MenuItem value={0}></MenuItem>
-                                    {planets?.map((planet) => (
-                                        <MenuItem key={planet.id} value={planet.id}>{planet.name}</MenuItem>
-                                    ))}
-                                </Select>
-                            </FormControl>
-                        </Grid>
-                        <Grid size={{ xs: 12, md: 6 }}>
-                            <TextField
-                                id="image"
-                                fullWidth
-                                variant="outlined"
-                                label={t('labels.character_image')}
-                                value={formik.values.image}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                helperText={formik.touched.image && formik.errors.image}
-                                error={formik.touched.image && Boolean(formik.errors.image)}
-                            />
-                        </Grid>
+                    <Grid size={{ xs: 12 }}>
+                        <TextField
+                            id="name"
+                            fullWidth
+                            variant="outlined"
+                            label={t('labels.character_name')}
+                            value={formik.values.name}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            helperText={formik.touched.name && formik.errors.name}
+                            error={formik.touched.name && Boolean(formik.errors.name)}
+                        />
                     </Grid>
 
-                    <CardActions>
-                        <Stack direction="row" spacing={2} justifyContent="flex-start" mt={2}>
-                            <Button type="button" variant="outlined" color="secondary" onClick={() => formik.resetForm()}>
-                                {t('buttons.reset')}
-                            </Button>
-                            <Button type="submit"  variant="contained" color="primary" disabled={!formik.isValid || formik.isSubmitting}>
-                                {t('buttons.save')}
-                            </Button>
-                        </Stack>
-                    </CardActions>
-                </form>
+                    <Grid size={{ xs: 12, md: 6 }}>
+                        <TextField
+                            id="species"
+                            fullWidth
+                            variant="outlined"
+                            label={t('labels.character_species')}
+                            value={formik.values.species}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            helperText={formik.touched.species && formik.errors.species}
+                            error={formik.touched.species && Boolean(formik.errors.species)}
+                        />
+                    </Grid>
+                    <Grid size={{ xs: 12, md: 6 }}>
+                        <TextField
+                            id="type"
+                            fullWidth
+                            variant="outlined"
+                            label={t('labels.character_type')}
+                            value={formik.values.type}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            helperText={formik.touched.type && formik.errors.type}
+                            error={formik.touched.type && Boolean(formik.errors.type)}
+                        />
+                    </Grid>
 
-            </CardContent>
+                    <Grid size={{ xs: 12, md: 6 }}>
+                        <TextField
+                            id="gender"
+                            fullWidth
+                            variant="outlined"
+                            label={t('labels.character_gender')}
+                            value={formik.values.gender}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            helperText={formik.touched.gender && formik.errors.gender}
+                            error={formik.touched.gender && Boolean(formik.errors.gender)}
+                        />
+                    </Grid>
+                    <Grid size={{ xs: 12, md: 6 }}>
+                        <FormControl fullWidth>
+                            <InputLabel id="locationIdLabel">{t('labels.character_location')}</InputLabel>
+                            <Select
+                                labelId="locationIdLabel"
+                                id="locationId"
+                                value={formik.values.locationId}
+                                label={t('labels.character_location')}
+                                onChange={(event) => { formik.setFieldValue('locationId', event.target.value) }}
+                                error={formik.touched.locationId && Boolean(formik.errors.locationId)}
+                            >
+                                <MenuItem value={0}></MenuItem>
+                                {planets?.map((planet) => (
+                                    <MenuItem key={planet.id} value={planet.id}>{planet.name}</MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>                            
+                    </Grid>
+
+                    <Grid size={{ xs: 12, md: 6 }}>
+                        <FormControl fullWidth>
+                            <InputLabel id="originIdLabel">{t('labels.character_origin')}</InputLabel>
+                            <Select
+                                labelId="originIdLabel"
+                                id="originId"
+                                value={formik.values.originId}
+                                label={t('labels.character_origin')}
+                                onChange={(event) => { formik.setFieldValue('originId', event.target.value) }}
+                                error={formik.touched.originId && Boolean(formik.errors.originId)}
+                            >
+                                <MenuItem value={0}></MenuItem>
+                                {planets?.map((planet) => (
+                                    <MenuItem key={planet.id} value={planet.id}>{planet.name}</MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
+                    </Grid>
+                    <Grid size={{ xs: 12, md: 6 }}>
+                        <TextField
+                            id="image"
+                            fullWidth
+                            variant="outlined"
+                            label={t('labels.character_image')}
+                            value={formik.values.image}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            helperText={formik.touched.image && formik.errors.image}
+                            error={formik.touched.image && Boolean(formik.errors.image)}
+                        />
+                    </Grid>
+                </Grid>
+
+                <CardActions>
+                    <Stack direction="row" spacing={2} justifyContent="flex-start" mt={2}>
+                        <Button type="button" variant="outlined" color="secondary" onClick={() => formik.resetForm()}>
+                            {t('buttons.reset')}
+                        </Button>
+                        <Button type="submit"  variant="contained" color="primary" disabled={!formik.isValid || formik.isSubmitting}>
+                            {t('buttons.save')}
+                        </Button>
+                    </Stack>
+                </CardActions>
+                </Box>
+            </form>
+            </Box>
         </Box>
     )
 }

@@ -46,7 +46,13 @@ export default function MainLayout() {
         <>
             <header>
                 <AppBar position="static">
-                    <Container maxWidth="xl">
+                    <Container 
+                        maxWidth={false} 
+                        sx={{ 
+                            px: { xs: 1, sm: 2, md: 3 },
+                            width: '100%'
+                        }}
+                    >
                         <Toolbar disableGutters>
                             <Logo />
 
