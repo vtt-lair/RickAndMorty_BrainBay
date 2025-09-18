@@ -5,22 +5,23 @@ Frontend: Vite React.js
 
 ## Setup Importer and API
 1. Clone the repo.
-2. Open the Solution, it should already be setup as a Multiple Startup Project. But make sure that the following two projects are set to start
+2. Open the Solution, it should to have the following projects to start ```but``` you might need to set the solution to use Multiple Startup Project. So make sure that the following two projects are set to start
 ```
 - RickAndMorty.Api
 - RickAndMorty.Importer
 ```
 3. Restore NuGet Packages to make sure all used packages are installed.
-4. Rebuild and then Start as http.
+4. Make sure there isn't any database in your localdb called ```RickAndMortyDb```
+5. Rebuild and then Start as http.
 
 ## Setup Frontend
 1. Repo would already have been cloned
-2. Open the RickAndMorty.WebUI folder in VS Code (or similiar)
-3. In a terminal, while in the RickAndMorty.WebUI folder, install the needed packages
+2. Open the ```RickAndMorty.WebUI``` folder in VS Code (or similiar)
+3. In a terminal, while in the ```RickAndMorty.WebUI``` folder, install the needed packages:
 ```(npm)
 npm install
 ```
-4. Once all packages are installed, run the following script to run the website
+4. Once all packages are installed, run the following script to run the website:
 ```(npm)
 npm run dev
 ```
