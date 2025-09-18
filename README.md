@@ -25,6 +25,7 @@ npm install
 ```(npm)
 npm run dev
 ```
+5. Access the website by click on the link in the terminal, it should point to [http://localhost:5173/](http://localhost:5173/)
 
 ## Applications
 ### Rick and Morty Importer - Console App
