@@ -15,17 +15,37 @@
         "character_image": "Avatar"
     },
     "titles": {
-        "character_list": "Character List"
+        "character_list": "Character List",
+        "add_character": "Add New Character"
     },
     "labels": {
         "origin": "Origin",
         "location": "Location",
-        "unknown": "Unknown"
+        "unknown": "Unknown",
+        "character_name": "Name",
+        "character_species": "Species",
+        "character_type": "Type",
+        "character_gender": "Gender",
+        "character_origin": "Origin",
+        "character_location": "Current Location",
+        "character_image": "Avatar"
     },
     "buttons": {
         "add_character": "Add Character",
         "save": "Save",
         "cancel": "Cancel",
-        "back_to_list": "Back to List"
+        "reset": "Reset",
+        "back": "Back"
+    },
+    "messages": {
+        "character_saved_success": "Character saved successfully!",
+        "character_saved_error": "Error saving character. Please try again."
+    },
+    "menu": {
+        "character_list": "Character List",
+        "add_character": "Add Character"
+    },
+    "values": {
+        "unknown_dimension": "Unknown Dimension"
     }
 }

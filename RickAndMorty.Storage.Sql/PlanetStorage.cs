@@ -18,7 +18,17 @@ namespace RickAndMorty.Storage.Sql
             using var connection = _connectionFactory.CreateConnection();
             connection.Open();
 
-            var dtos = await connection.QueryAsync<Dtos.Planet>("SELECT Id, Name, Type, Dimension FROM Planets;");
+            var dtos = await connection.QueryAsync<Dtos.Planet>(@"
+                SELECT Id, Name, Type, 
+                CASE 
+                    WHEN Dimension IS NULL OR 
+                         Dimension = '' OR 
+                         LOWER(TRIM(Dimension)) IN ('unknown', 'unknown dimension')
+                    THEN 'values.unknown_dimension' 
+                    ELSE Dimension 
+                END AS Dimension 
+                FROM Planets 
+                ORDER BY Dimension, Name;");
             return dtos;
         }
 

@@ -19,6 +19,7 @@ namespace RickAndMorty.Services.Character.Queries
             return dtos.Select(dto => new Models.Character
             {
                 Id = dto.Id,
+                ExternalId = dto.ExternalId,
                 Name = dto.Name,
                 Species = dto.Species,
                 Type = dto.Type,

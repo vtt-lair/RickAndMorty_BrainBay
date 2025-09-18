@@ -21,7 +21,7 @@ namespace RickAndMorty.Storage.Sql
 
             var sql = @"
                 SELECT
-                    c.Id, c.Name, c.Species, c.Type, c.Gender, c.OriginId, c.LocationId, c.Image,
+                    c.Id, c.ExternalId, c.Name, c.Species, c.Type, c.Gender, c.OriginId, c.LocationId, c.Image,
                     c.DateModified, c.IsDeleted,
                     o.Name as OriginName, o.Type as OriginType, o.Dimension as OriginDimension,
                     l.Name as LocationName, l.Type as LocationType, l.Dimension as LocationDimension
@@ -56,8 +56,8 @@ namespace RickAndMorty.Storage.Sql
                         DateModified = @DateModified,
                         IsDeleted = @IsDeleted
                 WHEN NOT MATCHED THEN
-                    INSERT (Id, Name, Species, Type, Gender, OriginId, LocationId, Image, DateModified, IsDeleted)
-                    VALUES (@Id, @Name, @Species, @Type, @Gender, @OriginId, @LocationId, @Image, @DateModified, @IsDeleted);";
+                    INSERT (ExternalId, Name, Species, Type, Gender, OriginId, LocationId, Image, DateModified, IsDeleted)
+                    VALUES (@ExternalId, @Name, @Species, @Type, @Gender, @OriginId, @LocationId, @Image, @DateModified, @IsDeleted);";
 
             var affected = await connection.ExecuteAsync(sql, entity);
 
@@ -85,8 +85,8 @@ namespace RickAndMorty.Storage.Sql
                         DateModified = @DateModified,
                         IsDeleted = @IsDeleted
                 WHEN NOT MATCHED THEN
-                    INSERT (Id, Name, Species, Type, Gender, OriginId, LocationId, Image, DateModified, IsDeleted)
-                    VALUES (@Id, @Name, @Species, @Type, @Gender, @OriginId, @LocationId, @Image, @DateModified, @IsDeleted);";
+                    INSERT (ExternalId, Name, Species, Type, Gender, OriginId, LocationId, Image, DateModified, IsDeleted)
+                    VALUES (@ExternalId, @Name, @Species, @Type, @Gender, @OriginId, @LocationId, @Image, @DateModified, @IsDeleted);";
 
             var affected = await connection.ExecuteAsync(sql, entities.ToList());
 
