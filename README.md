@@ -11,12 +11,12 @@ Frontend: Vite React.js
 - RickAndMorty.Importer
 ```
 3. Restore NuGet Packages to make sure all used packages are installed.
-4. Make sure there isn't any database in your localdb called ```RickAndMortyDb```
+4. Make sure there isn't any database in your localdb called ```RickAndMortyDb```.
 5. Rebuild and then Start as http.
 
 ## Setup Frontend
-1. Repo would already have been cloned
-2. Open the ```RickAndMorty.WebUI``` folder in VS Code (or similiar)
+1. Repo would already have been cloned.
+2. Open the ```RickAndMorty.WebUI``` folder in VS Code (or similiar).
 3. In a terminal, while in the ```RickAndMorty.WebUI``` folder, install the needed packages:
 ```(npm)
 npm install
