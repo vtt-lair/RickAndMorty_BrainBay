@@ -2,6 +2,7 @@ import { Planet } from './planet';
 
 export class Character {
     id: number;
+    externalId?: number;
     name: string | null;
     species: string | null;
     type: string | null;
@@ -15,6 +16,7 @@ export class Character {
     constructor()
     constructor(
         id: number,
+        externalId: number | null,
         name: string | null,
         species: string | null,
         type: string | null,
@@ -27,6 +29,7 @@ export class Character {
     );
     constructor(
         id?: number,
+        externalId?: number | null,
         name?: string | null,
         species?: string | null,
         type?: string | null,
@@ -38,6 +41,7 @@ export class Character {
         image?: string | null,
     ) {
         this.id = id ?? 0;
+        this.externalId = externalId ?? 0;
         this.name = name ?? null;
         this.species = species ?? null;
         this.type = type ?? null;

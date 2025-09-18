@@ -72,14 +72,16 @@ export default function CharacterList() {
             className="character-card-box"
         >
             <CardContent>
-                <Stack direction={"row"} justifyContent="space-between" alignItems="center" mb={2}>
-                    <Typography variant="h3" component="div" className="page-title">
+                <Stack direction={"row"} justifyContent="space-between" alignItems="start" mb={2}>
+                    <Typography sx={{ typography: { md: 'h3', sm: 'h4', xs: 'h6' } }} component="div" className="page-title">
                         {t('titles.character_list')}
                     </Typography>
-                    <SearchTextField onSearch={handleSearch} onClear={handleClear} />
-                    <Button variant="contained" color="primary" onClick={() => navigateTo('add-character')}>
-                        {t('buttons.add_character')}
-                    </Button>
+                    <Stack direction={"row"} spacing={2} alignItems="end">
+                        <SearchTextField onSearch={handleSearch} onClear={handleClear} />
+                        <Button variant="contained" color="primary" onClick={() => navigateTo('/add-character')}>
+                            {t('buttons.add_character')}
+                        </Button>
+                    </Stack>
                 </Stack>
 
                 <Grid container spacing={2} direction={"row"}>
